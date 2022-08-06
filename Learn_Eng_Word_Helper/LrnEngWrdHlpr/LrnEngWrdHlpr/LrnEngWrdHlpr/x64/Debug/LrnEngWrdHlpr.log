@@ -1,0 +1,7 @@
+﻿  Ver_1-0.cpp
+E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\LrnEngWrdHlpr\Ver_1-0.cpp(47,13): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\LrnEngWrdHlpr\Ver_1-0.cpp(62,11): warning C4129: '(': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\LrnEngWrdHlpr\Ver_1-0.cpp(62,11): warning C4129: ')': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\LrnEngWrdHlpr\Ver_1-0.cpp(63,11): warning C4129: '(': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\LrnEngWrdHlpr\Ver_1-0.cpp(63,11): warning C4129: ')': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+  LrnEngWrdHlpr.vcxproj -> E:\코딩\취미\Learn_Eng_Word_Helper\LrnEngWrdHlpr\LrnEngWrdHlpr\x64\Debug\LrnEngWrdHlpr.exe
