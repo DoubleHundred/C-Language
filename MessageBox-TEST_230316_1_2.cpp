@@ -1,11 +1,11 @@
 #include <windows.h>
 
 int Message() {
-	return MessageBox(NULL, TEXT("\"¿©Ä£\"À»(¸¦) Ã£À» ¼ö ¾ø½À´Ï´Ù."), TEXT("Brain"), MB_RETRYCANCEL | MB_ICONERROR);
+	return MessageBox(NULL, TEXT("\"ì—¬ì¹œ\"ì„(ë¥¼) ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."), TEXT("Brain"), MB_RETRYCANCEL | MB_ICONERROR);
 }
 
 int main() {
-	int i = MessageBox(NULL, TEXT("\"¿©Ä£\"À»(¸¦) Ã£À¸½Ã°Ú½À´Ï±î?"), TEXT("Brain"), MB_YESNO);
+	int i = MessageBox(NULL, TEXT("\"ì—¬ì¹œ\"ì„(ë¥¼) ì°¾ìœ¼ì‹œê² ìŠµë‹ˆê¹Œ?"), TEXT("Brain"), MB_YESNO);
 
 	if (i == IDNO) {
 		return 0;
