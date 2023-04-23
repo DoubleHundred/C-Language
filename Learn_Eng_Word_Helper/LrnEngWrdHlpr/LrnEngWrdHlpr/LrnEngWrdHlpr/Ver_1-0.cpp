@@ -5,6 +5,8 @@
 #include <string.h>
 #include <time.h>
 #include <windows.h>
+#include <string>
+#include <cctype>
 
 char Eng[100][100] = { 0 };		//English
 char Kor[100][100] = { 0 };		//Korean
@@ -15,21 +17,21 @@ int loop = 0;
 void main() {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 
-	printf("\"0 0\" ÀÔ·ÂÀ¸·Î ´Ü¾î¸¦ ±×¸¸ ÀÔ·Â ÇÒ ¼ö ÀÖ½À´Ï´Ù, ¶ç¾î¾²±â´Â \'_\'·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. \n");
+	printf("\"0 0\" ìž…ë ¥ìœ¼ë¡œ ë‹¨ì–´ë¥¼ ê·¸ë§Œ ìž…ë ¥ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤, ë„ì–´ì“°ê¸°ëŠ” \'_\'ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”. \n");
 
 	while (1) {
 		wrd++;
-		printf("\n\n\"Eng Kor\" ´Ü¾î ÀÔ·Â %d. ", wrd);
+		printf("\n\n\"Eng Kor\" ë‹¨ì–´ ìž…ë ¥ %d. ", wrd);
 		scanf("%s %s", Eng[wrd - 1], Kor[wrd - 1]);
 
 		if (Eng[wrd - 1][0] == '0' && Kor[wrd - 1][0] == '0') {
 			wrd--;
-			printf("\nÀÔ·ÂÇÑ ´Ü¾î °³¼ö: %d, [wrdAdd] ¸í·É¾î·Î ´õ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù. \n\n", wrd);
+			printf("\nìž…ë ¥í•œ ë‹¨ì–´ ê°œìˆ˜: %d, [wrdAdd] ëª…ë ¹ì–´ë¡œ ë” ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n", wrd);
 
 			if (wrd == 0) {
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 
-				printf("\nÃß°¡ÇÑ ´Ü¾î°¡ ¾ø½À´Ï´Ù. 3ÃÊ ÈÄ ÀÚµ¿À¸·Î ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù. \n");
+				printf("\nì¶”ê°€í•œ ë‹¨ì–´ê°€ ì—†ìŠµë‹ˆë‹¤. 3ì´ˆ í›„ ìžë™ìœ¼ë¡œ í”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤. \n");
 				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 				Sleep(3000);
@@ -47,37 +49,41 @@ void main() {
 		srand(time(NULL));
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
-		printf("\n\"help\"¸¦ ÀÔ·ÂÇÏ¿© ¿©·¯ ¸í·É¾îµéÀ» º¼ ¼ö ÀÖ½À´Ï´Ù \n> ");
+		printf("\n\"help\"ë¥¼ ìž…ë ¥í•˜ì—¬ ì—¬ëŸ¬ ëª…ë ¹ì–´ë“¤ì„ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤ \n> ");
 		
 		scanf("%s", cmd);
+		
+		for(int i=0; i<15; i++) {
+			cmd[i] = tolower(cmd[i]);
+		}
 
 		/*====================*/
 
-		/*=== µµ¿ò¸» ===*/		// help = µµ¿ò¸» Ãâ·Â
-		if(strcmp(cmd, "help") == 0) {		//strcmp´Â °ªÀÌ ÂüÀÌ¸é '0', °ÅÁþÀÌ¸é '-1'À» Ãâ·ÂÇÑ´Ù. (¿Ö ±»ÀÌ..)
+		/*=== ë„ì›€ë§ ===*/		// help = ë„ì›€ë§ ì¶œë ¥
+		if(strcmp(cmd, "help") == 0) {		//strcmpëŠ” ê°’ì´ ì°¸ì´ë©´ '0', ê±°ì§“ì´ë©´ '-1'ì„ ì¶œë ¥í•œë‹¤. (ì™œ êµ³ì´..)
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 2);
 
-			printf("\nLearn English Word Helper 1.0v µµ¿ò¸» \n\n\n");
-			printf("\n[´Ü¾î ¿Ü¿ì±â] \n\n");
-			printf("EngType1 \n¿µ´Ü¾î°¡ ÀÔ·ÂÇÑ ¼ø¼­´ë·Î ³ª¿À¸ç, ÇÑ±¹¾î¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù. \n\nEngType2 \n¿µ´Ü¾î°¡ µÞ ¼ø¼­ºÎÅÍ ¼ø¼­´ë·Î ³ª¿À¸ç, ÇÑ±¹¾î¸¦ ÀÔ·ÂÇØ¾ßÇÕ´Ï´Ù. \n\nEngType3 \n¿µ´Ü¾î°¡ ¿µ´Ü¾î °³¼ö x 2 ¸¸Å­ ·£´ýÀ¸·Î ³ª¿É´Ï´Ù. \(¾È ³ª¿À´Â ´Ü¾î°¡ Á¸ÀçÇÒ ¼ö ÀÖÀ½\)\n\n");
-			printf("KorType1 \nÇÑ±ÛÀÌ ÀÔ·ÂÇÑ ¼ø¼­´ë·Î ³ª¿À¸ç, ¿µ¾î¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù. \n\nKorType2 \nÇÑ±ÛÀÌ µÔ ¼ø¼­ºÎÅÍ ¼ø¼­´ë·Î ³ª¿À¸ç, ¿µ¾î¸¦ ÀÔ·ÂÇØ¾ß ÇÕ´Ï´Ù. \n\nKorType3 \nÇÑ±ÛÀÌ ÇÑ±Û °³¼ö x 2 ¸¸Å­ ·£´ýÀ¸·Î ³ª¿É´Ï´Ù. \(¾È ³ª¿À´Â ´Ü¾î°¡ Á¸ÀçÇÒ ¼ö ÀÖÀ½\) \n\n\n");
-			printf("\n[´Ü¾î Ãß°¡/»èÁ¦] \n\n");
-			printf("wrd \nÀúÀåµÈ ´Ü¾î¸¦ º¼ ¼ö ÀÖ½À´Ï´Ù. \n\n");
-			printf("wrdAdd \n»õ·Î¿î ´Ü¾î¸¦ ±âÁ¸ ´Ü¾î¿Í ÇÔ²² Ãß°¡ÇÕ´Ï´Ù. \n\nwrdDellAll \n¸ðµç ´Ü¾î¸¦ Áö¿ì°í ´Ù½Ã ÀúÀåÇÕ´Ï´Ù. \n\nWrdDelPrt \n¿øÇÏ´Â ´Ü¾î ÇÏ³ª¸¸ Áö¿ó´Ï´Ù. \n\n\n");
-			printf("\n[Á¾·á ¹× ±âÅ¸] \n\n");
-			printf("prgmFnsh / PF \nÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù. \n\nDEL \n¸ðµç ³»¿ëÀ» »èÁ¦ÇÕ´Ï´Ù. \n\nVerChk \nÇöÀç ¹öÀüÀ» È®ÀÎ ÇÒ ¼ö ÀÖ½À´Ï´Ù. \n\n");
-			printf("mail \nÁ¦ÀÛÀÚÀÇ ¸ÞÀÏÀ» º¼ ¼ö ÀÖ½À´Ï´Ù \n\nGitHub \nÀÌ ÆÄÀÏÀÌ ÀúÀåµÇ¾î ÀÖ´Â C-Language ·¹ÆÄÁöÅä¸® ¸µÅ©°¡ º¸¿©Áý´Ï´Ù. \n\nLink \nÁ¦ÀÛÀÚÀÇ SNS ¸µÅ©µéÀ» º¼ ¼ö ÀÖ½À´Ï´Ù. \n\ncredits \nÁ¦ÀÛ¿¡ µµ¿òÀ» ÁÖ½Å ºÐµéÀ» º¼ ¼ö ÀÖ½À´Ï´Ù. \n\n\n");
+			printf("\nLearn English Word Helper 1.0v ë„ì›€ë§ \n\n\n");
+			printf("\n[ë‹¨ì–´ ì™¸ìš°ê¸°] \n\n");
+			printf("EngType1 \nì˜ë‹¨ì–´ê°€ ìž…ë ¥í•œ ìˆœì„œëŒ€ë¡œ ë‚˜ì˜¤ë©°, í•œêµ­ì–´ë¥¼ ìž…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤. \n\nEngType2 \nì˜ë‹¨ì–´ê°€ ë’· ìˆœì„œë¶€í„° ìˆœì„œëŒ€ë¡œ ë‚˜ì˜¤ë©°, í•œêµ­ì–´ë¥¼ ìž…ë ¥í•´ì•¼í•©ë‹ˆë‹¤. \n\nEngType3 \nì˜ë‹¨ì–´ê°€ ì˜ë‹¨ì–´ ê°œìˆ˜ x 2 ë§Œí¼ ëžœë¤ìœ¼ë¡œ ë‚˜ì˜µë‹ˆë‹¤. \(ì•ˆ ë‚˜ì˜¤ëŠ” ë‹¨ì–´ê°€ ì¡´ìž¬í•  ìˆ˜ ìžˆìŒ\)\n\n");
+			printf("KorType1 \ní•œê¸€ì´ ìž…ë ¥í•œ ìˆœì„œëŒ€ë¡œ ë‚˜ì˜¤ë©°, ì˜ì–´ë¥¼ ìž…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤. \n\nKorType2 \ní•œê¸€ì´ ë‘£ ìˆœì„œë¶€í„° ìˆœì„œëŒ€ë¡œ ë‚˜ì˜¤ë©°, ì˜ì–´ë¥¼ ìž…ë ¥í•´ì•¼ í•©ë‹ˆë‹¤. \n\nKorType3 \ní•œê¸€ì´ í•œê¸€ ê°œìˆ˜ x 2 ë§Œí¼ ëžœë¤ìœ¼ë¡œ ë‚˜ì˜µë‹ˆë‹¤. \(ì•ˆ ë‚˜ì˜¤ëŠ” ë‹¨ì–´ê°€ ì¡´ìž¬í•  ìˆ˜ ìžˆìŒ\) \n\n\n");
+			printf("\n[ë‹¨ì–´ ì¶”ê°€/ì‚­ì œ] \n\n");
+			printf("wrd \nì €ìž¥ëœ ë‹¨ì–´ë¥¼ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n");
+			printf("wrdAdd \nìƒˆë¡œìš´ ë‹¨ì–´ë¥¼ ê¸°ì¡´ ë‹¨ì–´ì™€ í•¨ê»˜ ì¶”ê°€í•©ë‹ˆë‹¤. \n\nwrdDellAll \nëª¨ë“  ë‹¨ì–´ë¥¼ ì§€ìš°ê³  ë‹¤ì‹œ ì €ìž¥í•©ë‹ˆë‹¤. \n\nWrdDelPrt \nì›í•˜ëŠ” ë‹¨ì–´ í•˜ë‚˜ë§Œ ì§€ì›ë‹ˆë‹¤. \n\n\n");
+			printf("\n[ì¢…ë£Œ ë° ê¸°íƒ€] \n\n");
+			printf("prgmFnsh / PF \ní”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤. \n\nDEL \ní™”ë©´ì„ ì´ˆê¸°í™” í•©ë‹ˆë‹¤. \n\nVersion \ní˜„ìž¬ ë²„ì „ì„ í™•ì¸ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n");
+			printf("mail \nì œìž‘ìžì˜ ë©”ì¼ì„ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤ \n\nGitHub \nì´ íŒŒì¼ì´ ì €ìž¥ë˜ì–´ ìžˆëŠ” C-Language ë ˆíŒŒì§€í† ë¦¬ ë§í¬ê°€ ë³´ì—¬ì§‘ë‹ˆë‹¤. \n\nLink \nì œìž‘ìžì˜ SNS ë§í¬ë“¤ì„ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\ncredits \nì œìž‘ì— ë„ì›€ì„ ì£¼ì‹  ë¶„ë“¤ì„ ë³¼ ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n\n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 
-		/*=== ´Ü¾î ¿Ü¿ì±â ===*/		// EngType1/KorType1 = 1 ~ N ±îÁöÀÇ ¿µ/ÇÑ±Û ´Ü¾î Ãâ·Â, EngType2/KorType2 = EngType1°ú °°°í, N ~ 1ÀÌ ´Ù¸§, EngType3/KorType3 = ¾Õ¿¡¿Í °°À¸³ª N * 2¸¸Å­ ·£´ýÀ¸·Î ¿µ/ÇÑ±Û´Ü¾î°¡ ³ª¿È (¾È ³ª¿À´Â °Í Á¸Àç)
-		else if(strcmp(cmd, "EngType1") == 0) {
+		/*=== ë‹¨ì–´ ì™¸ìš°ê¸° ===*/		// EngType1/KorType1 = 1 ~ N ê¹Œì§€ì˜ ì˜/í•œê¸€ ë‹¨ì–´ ì¶œë ¥, EngType2/KorType2 = EngType1ê³¼ ê°™ê³ , N ~ 1ì´ ë‹¤ë¦„, EngType3/KorType3 = ì•žì—ì™€ ê°™ìœ¼ë‚˜ N * 2ë§Œí¼ ëžœë¤ìœ¼ë¡œ ì˜/í•œê¸€ë‹¨ì–´ê°€ ë‚˜ì˜´ (ì•ˆ ë‚˜ì˜¤ëŠ” ê²ƒ ì¡´ìž¬)
+		else if(strcmp(cmd, "engtype1") == 0) {
 			int crect = 0;
 
 			system("cls");
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-			printf("EngType1 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+			printf("EngType1 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 			crect = 0;
 			int wrng[100] = { 0 };
@@ -105,7 +111,7 @@ void main() {
 				}
 			}
 
-			printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", wrd, crect);
+			printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", wrd, crect);
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 			for (int q = 0; q < w; q++) {
@@ -116,13 +122,13 @@ void main() {
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
-		else if (strcmp(cmd, "EngType2") == 0) {
+		else if (strcmp(cmd, "engtype2") == 0) {
 			int crect = 0;
 
 			system("cls");
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-			printf("EngType2 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+			printf("EngType2 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 			crect = 0;
 			int wrng[100] = { 0 };
@@ -150,7 +156,7 @@ void main() {
 				}
 			}
 
-			printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", wrd, crect);
+			printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", wrd, crect);
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 			for (int q = 0; q < w; q++) {
@@ -167,7 +173,7 @@ void main() {
 		system("cls");
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-		printf("EngType3 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+		printf("engtype3 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 		crect = 0;
 		int wrng[100] = { 0 };
@@ -197,7 +203,7 @@ void main() {
 			}
 		}
 
-		printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", (wrd * 2), crect);
+		printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", (wrd * 2), crect);
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		for (int q = 0; q < w; q++) {
@@ -208,13 +214,13 @@ void main() {
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
-		else if (strcmp(cmd, "KorType1") == 0) {
+		else if (strcmp(cmd, "kortype1") == 0) {
 		int crect = 0;
 
 		system("cls");
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-		printf("KorType1 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+		printf("KorType1 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 		crect = 0;
 		int wrng[100] = { 0 };
@@ -242,7 +248,7 @@ void main() {
 			}
 		}
 
-		printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", wrd, crect);
+		printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", wrd, crect);
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		for (int q = 0; q < w; q++) {
@@ -253,13 +259,13 @@ void main() {
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
-		else if (strcmp(cmd, "KorType2") == 0) {
+		else if (strcmp(cmd, "kortype2") == 0) {
 		int crect = 0;
 
 		system("cls");
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-		printf("KorType2 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+		printf("KorType2 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 		crect = 0;
 		int wrng[100] = { 0 };
@@ -287,7 +293,7 @@ void main() {
 			}
 		}
 
-		printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", wrd, crect);
+		printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", wrd, crect);
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		for (int q = 0; q < w; q++) {
@@ -304,7 +310,7 @@ void main() {
 		system("cls");
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-		printf("KorType3 ´Ü¾î Å×½ºÆ®¸¦ ½ÃÀÛÇÕ´Ï´Ù. \n");
+		printf("kortype3 ë‹¨ì–´ í…ŒìŠ¤íŠ¸ë¥¼ ì‹œìž‘í•©ë‹ˆë‹¤. \n");
 
 		crect = 0;
 		int wrng[100] = { 0 };
@@ -334,7 +340,7 @@ void main() {
 			}
 		}
 
-		printf("%d¹®Á¦ Áß %d¹®Á¦ ¸Â¾Ò½À´Ï´Ù. \n\n", (wrd * 2), crect);
+		printf("%dë¬¸ì œ ì¤‘ %dë¬¸ì œ ë§žì•˜ìŠµë‹ˆë‹¤. \n\n", (wrd * 2), crect);
 
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 		for (int q = 0; q < w; q++) {
@@ -346,7 +352,7 @@ void main() {
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 
-		/*=== ´Ü¾î Ãß°¡/»èÁ¦ ===*/	// wrd = ÀúÀåÇÑ ´Ü¾î º¸±â, wrdAdd = ´Ü¾î Ãß°¡, wrdDelAll = ´Ü¾î ÀüÃ¼ »èÁ¦ ¹× ´Ù½Ã ÀÔ·Â, wrdDelPrt = Æ¯Á¤ ºÎºÐ ´Ü¾î »èÁ¦
+		/*=== ë‹¨ì–´ ì¶”ê°€/ì‚­ì œ ===*/	// wrd = ì €ìž¥í•œ ë‹¨ì–´ ë³´ê¸°, wrdAdd = ë‹¨ì–´ ì¶”ê°€, wrdDelAll = ë‹¨ì–´ ì „ì²´ ì‚­ì œ ë° ë‹¤ì‹œ ìž…ë ¥, wrdDelPrt = íŠ¹ì • ë¶€ë¶„ ë‹¨ì–´ ì‚­ì œ
 		else if (strcmp(cmd, "wrd") == 0) {		// no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 			for (int q = 0; q < wrd; q++) {
@@ -359,16 +365,16 @@ void main() {
 		else if (strcmp(cmd, "wrdAdd") == 0) {		// no header
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
-			printf("\n\"0 0\" ÀÔ·ÂÀ¸·Î ´Ü¾î¸¦ ±×¸¸ ÀÔ·Â ÇÒ ¼ö ÀÖ½À´Ï´Ù, ¶ç¾î¾²±â´Â \'_\'·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. \n");
+			printf("\n\"0 0\" ìž…ë ¥ìœ¼ë¡œ ë‹¨ì–´ë¥¼ ê·¸ë§Œ ìž…ë ¥ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤, ë„ì–´ì“°ê¸°ëŠ” \'_\'ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”. \n");
 
 			while (1) {
 				wrd++;
-				printf("\n\n\"Eng Kor\" ´Ü¾î ÀÔ·Â %d. ", wrd);
+				printf("\n\n\"Eng Kor\" ë‹¨ì–´ ìž…ë ¥ %d. ", wrd);
 				scanf("%s %s", Eng[wrd - 1], Kor[wrd - 1]);
 
 				if (Eng[wrd - 1][0] == '0' && Kor[wrd - 1][0] == '0') {
 					wrd--;
-					printf("\nÀÔ·ÂÇÑ ´Ü¾î °³¼ö: %d, [wrdAdd] ¸í·É¾î·Î ´õ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù. \n\n", wrd);
+					printf("\nìž…ë ¥í•œ ë‹¨ì–´ ê°œìˆ˜: %d, [wrdAdd] ëª…ë ¹ì–´ë¡œ ë” ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n", wrd);
 
 					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 					break;
@@ -387,21 +393,21 @@ void main() {
 
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 
-			printf("\n\"0 0\" ÀÔ·ÂÀ¸·Î ´Ü¾î¸¦ ±×¸¸ ÀÔ·Â ÇÒ ¼ö ÀÖ½À´Ï´Ù, ¶ç¾î¾²±â´Â \'_\'·Î ÀÔ·ÂÇØ ÁÖ¼¼¿ä. \n");
+			printf("\n\"0 0\" ìž…ë ¥ìœ¼ë¡œ ë‹¨ì–´ë¥¼ ê·¸ë§Œ ìž…ë ¥ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤, ë„ì–´ì“°ê¸°ëŠ” \'_\'ë¡œ ìž…ë ¥í•´ ì£¼ì„¸ìš”. \n");
 
 			while (1) {
 				wrd++;
-				printf("\n\n\"Eng Kor\" ´Ü¾î ÀÔ·Â %d. ", wrd);
+				printf("\n\n\"Eng Kor\" ë‹¨ì–´ ìž…ë ¥ %d. ", wrd);
 				scanf("%s %s", Eng[wrd - 1], Kor[wrd - 1]);
 
 				if (Eng[wrd - 1][0] == '0' && Kor[wrd - 1][0] == '0') {
 					wrd--;
-					printf("\nÀÔ·ÂÇÑ ´Ü¾î °³¼ö: %d, [wrdAdd] ¸í·É¾î·Î ´õ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù. \n\n", wrd);
+					printf("\nìž…ë ¥í•œ ë‹¨ì–´ ê°œìˆ˜: %d, [wrdAdd] ëª…ë ¹ì–´ë¡œ ë” ì¶”ê°€í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤. \n\n", wrd);
 
 					if (wrd == 0) {
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 12);
 
-						printf("\nÃß°¡ÇÑ ´Ü¾î°¡ ¾ø½À´Ï´Ù. 3ÃÊ ÈÄ ÀÚµ¿À¸·Î ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù. \n");
+						printf("\nì¶”ê°€í•œ ë‹¨ì–´ê°€ ì—†ìŠµë‹ˆë‹¤. 3ì´ˆ í›„ ìžë™ìœ¼ë¡œ í”„ë¡œê·¸ëž¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤. \n");
 						SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 						Sleep(3000);
@@ -417,7 +423,7 @@ void main() {
 			int prt = 0;
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 14);
 
-			printf("\n»èÁ¦ÇÏ°í ½ÍÀº ´Ü¾îÀÇ ¹øÈ£¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä. \n> ");
+			printf("\nì‚­ì œí•˜ê³  ì‹¶ì€ ë‹¨ì–´ì˜ ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ ì£¼ì„¸ìš”. \n> ");
 			scanf("%d", &prt);
 
 			for (int q = 0; q < 100; q++) {
@@ -433,20 +439,20 @@ void main() {
 				}
 			}
 
-			printf("\n%d¹ø ´Ü¾î¸¦ ¼º°øÀûÀ¸·Î »èÁ¦Çß½À´Ï´Ù. \n", prt);
+			printf("\n%dë²ˆ ë‹¨ì–´ë¥¼ ì„±ê³µì ìœ¼ë¡œ ì‚­ì œí–ˆìŠµë‹ˆë‹¤. \n", prt);
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 
-		/*=== Á¾·á ¹× ±âÅ¸ ===*/	// prgmFnsh = ÇÁ·Î±×·¥ Á¾·á, DEL = È­¸é Áö¿ì±â, VerChk = ¹öÀü Ã¼Å©, mail = Á¦ÀÛÀÚ ¸ÅÀÏ, GitHub = ±êÇãºê C-Language ¸µÅ©, Link = Á¦ÀÛÀÚ SNS, credits = Á¦ÀÛ¿¡ µµ¿òÀ» ÁÖ½Å ºÐµé
+		/*=== ì¢…ë£Œ ë° ê¸°íƒ€ ===*/	// prgmFnsh = í”„ë¡œê·¸ëž¨ ì¢…ë£Œ, DEL = í™”ë©´ ì§€ìš°ê¸°, VerChk = ë²„ì „ ì²´í¬, mail = ì œìž‘ìž ë§¤ì¼, GitHub = ê¹ƒí—ˆë¸Œ C-Language ë§í¬, Link = ì œìž‘ìž SNS, credits = ì œìž‘ì— ë„ì›€ì„ ì£¼ì‹  ë¶„ë“¤
 		else if (strcmp(cmd, "prgmFnsh") == 0 || strcmp(cmd, "PF") == 0) {	// no header
 			return;
 		}
-		else if (strcmp(cmd, "DEL") == 0) {			// no header
-			system("cls");		// ÄÜ¼Ö È­¸é ÃÊ±âÈ­
+		else if (strcmp(cmd, "del") == 0) {			// no header
+			system("cls");		// ì½˜ì†” í™”ë©´ ì´ˆê¸°í™”
 		}
-		else if (strcmp(cmd, "VerChk") == 0) {		// no header
+		else if (strcmp(cmd, "version") == 0) {		// no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 3);
-			printf("\nVer 1.0 \n");
+			printf("\nVer 1.1 \n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 		else if (strcmp(cmd, "mail") == 0) {		// no header
@@ -454,21 +460,21 @@ void main() {
 			printf("\nmail: dnil4@naver.com \n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
-		else if (strcmp(cmd, "GitHub") == 0) {		// no header
+		else if (strcmp(cmd, "gitHub") == 0) {		// no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 			printf("\nGitHub: https://github.com/BOLLT44/C-Language \n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
-		else if (strcmp(cmd, "Link") == 0) {		// no header
+		else if (strcmp(cmd, "link") == 0) {		// no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 9);
 			printf("\nTistory:    https://bollt.tistory.com/ \nYouTube:    https://www.youtube.com/channel/UCA-5RGnzDV2rskwBk241u3A \n");
 			printf("Twitch:     https://www.twitch.tv/bollt40\nTwitter:    https://twitter.com/BOLLT44 \nDiscord:    https://discord.com/invite/35hGybhC2Y \n");
-			printf("Naver Blog: https://blog.naver.com/dnil4 \nNaver Post: https://post.naver.com/my.naver?isHome=true \n");
+			printf("Naver Blog: https://blog.naver.com/dnil4 \nNaver Post: https://post.naver.com/my.naver?memberNo=42668331 \n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 		else if (strcmp(cmd, "credits") == 0) {		// no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-			printf("made by: BOLLT(real name X) \n");
+			printf("made by: BOLLT, CCoaLL\n");
 			printf("\nThank You!!\n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
@@ -476,7 +482,7 @@ void main() {
 		/*=== ERROR ===*/
 		else {		//no header
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 6);
-			printf("\n¸í·É¾î¸¦ ÀÎ½ÄÇÏÁö ¸øÇß½À´Ï´Ù. - ¸í·É¾î¿¡ ¿ÀÅ¸°¡ ÀÖ´ÂÁö È®ÀÎÇÏ¼¼¿ä. / Á¸ÀçÇÏ´Â ¸í·É¾îÀÎÁö È®ÀÎÇÏ¼¼¿ä. / ¿À·ù°¡ ÀÖÀ¸¸é ¾Ë·ÁÁÖ¼¼¿ä. [mail] ¸í·É¾î¸¦ ÀÔ·ÂÇÏ¿© Á¦ÀÛÀÚÀÇ ¸ÞÀÏÀ» È®ÀÎ ÇÒ ¼ö ÀÖ½À´Ï´Ù.\n\n\n");
+			printf("\nëª…ë ¹ì–´ë¥¼ ì¸ì‹í•˜ì§€ ëª»í–ˆìŠµë‹ˆë‹¤. - ëª…ë ¹ì–´ì— ì˜¤íƒ€ê°€ ìžˆëŠ”ì§€ í™•ì¸í•˜ì„¸ìš”. / ì¡´ìž¬í•˜ëŠ” ëª…ë ¹ì–´ì¸ì§€ í™•ì¸í•˜ì„¸ìš”. / ì˜¤ë¥˜ê°€ ìžˆìœ¼ë©´ ì•Œë ¤ì£¼ì„¸ìš”. [mail] ëª…ë ¹ì–´ë¥¼ ìž…ë ¥í•˜ì—¬ ì œìž‘ìžì˜ ë©”ì¼ì„ í™•ì¸ í•  ìˆ˜ ìžˆìŠµë‹ˆë‹¤.\n\n\n");
 			SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 		}
 
