@@ -1,0 +1,4 @@
+﻿  PnP_C_230422_1.cpp
+D:\Coding\practice&Play\C\2023\4\230422\PnP_C_230422_1\PnP_C_230422_1.cpp(66,2): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+D:\Coding\practice&Play\C\2023\4\230422\PnP_C_230422_1\PnP_C_230422_1.cpp(70,3): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  PnP_C_230423_1.vcxproj -> D:\Coding\practice&Play\C\2023\4\230423\PnP_C_230423_1\x64\Debug\PnP_C_230423_1.exe
